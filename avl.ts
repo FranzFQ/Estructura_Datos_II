@@ -105,8 +105,9 @@ export default class Avltree {
       this.root = null
       return old_subtree
     }
+    const delete_node = this.search(vault)
     this.root = this.deleth(vault, subtree)
-    return subtree
+    return delete_node
   }
 
   private deleth(ref: number, subtree: AVLNode | null = this.root): AVLNode | null{

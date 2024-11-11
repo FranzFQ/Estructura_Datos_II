@@ -46,11 +46,9 @@ export default class RBTree<T> {
         let uncle: TreeNode<T> | null;
         let side: "left" | "right" = "left";
         if (grandParent.key> ref.key) {
-          // Ref is in the left side
           uncle = grandParent.right;
           side = "left"
         }else{
-          // Ref is in the right side
           uncle = grandParent.left
           side = "right"
         }
@@ -63,22 +61,16 @@ export default class RBTree<T> {
           }else {
             direction = 'triangle'
           }
-          // Escenario 3 = triangulo
           if (direction === "triangle") {
             if (ref.key < parent.key) {
-              // Rotacion de padre a la derecha
               parent = parent.rotaterigth();
             }else{
-              // Rotacion de padre a la izquierda 
               parent = parent.rotateLeft();
             }
           }else{
-            // escenario 4 = linea
             if (ref.key < grandParent.key){
-              // Rotar el abuelo a la derecha
               grandParent = grandParent.rotaterigth();
             }else{
-              // Rotar el abuelo a la izquierda
               grandParent = grandParent.rotateLeft();
             }
             parent.swapColor();
@@ -86,7 +78,6 @@ export default class RBTree<T> {
           }
           
         }else if(uncle.color === "red"){
-          // Escenario 02
           grandParent.swapColor();
           parent.swapColor();
           uncle.swapColor();
@@ -99,8 +90,8 @@ export default class RBTree<T> {
     }
     if (ref === this.root && ref.color === "red") {
       ref.swapColor();
-    }
-  }
+    }
+  }
   
   public insert(key: number, value?: T) {
     this.root = this._insert({
