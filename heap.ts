@@ -3,8 +3,8 @@ import HeaNode from "./heap-node";
 export default class Heap {
   public root: HeaNode | null;
 
-  constructor(rootValue: number) {
-    this.root = new HeaNode(rootValue);
+  constructor() {
+    this.root = null;
   }
 
   public depth(value: number, subtree: HeaNode | null = this.root): number {
@@ -66,15 +66,18 @@ export default class Heap {
     }
   }
 
-  public insert_search(subtree: HeaNode | null = this.root, value: number): number{
+  public insert_(value: number, subtree: HeaNode | null = this.root): number{
+    if (this.root === null){
+    this.root = new HeaNode(value)
+    }
     if (subtree === null){
       return -1
     }else if (this.root?.left === null && this.root.right === null){
       this.insertLeft(value, Number(this.root.data))
       this.swap(this.root)
     }else if (subtree.left !== null && subtree.right !== null){
-      const left = this.insert_search(subtree.left, value)
-      const right = this.insert_search(subtree.right, value)
+      const left = this.insert_(value, subtree.left)
+      const right = this.insert_(value, subtree.right)
       const nodes_total = 2 ** (this.height(this.root) - 1)
       if((left + right) === nodes_total){
         this.insertLeft(value, Number(this.root?.data))

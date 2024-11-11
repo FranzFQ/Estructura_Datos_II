@@ -2,7 +2,7 @@ import HashNode from "./hash-node";
 
 
     export default class HashTable{
-    private _elements: Array<HashNode | null | undefined>;
+    public _elements: Array<HashNode | null | undefined>;
 
     constructor(size: number) {
         this._elements = new Array(size);
@@ -65,7 +65,7 @@ import HashNode from "./hash-node";
         return index;
     }
 
-    public insert(key: number, complement:any) {
+    public insert(key: number, complement:any = 0) {
         const node = new HashNode(key, complement);
         const index = this.hash(key);
 
